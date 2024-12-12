@@ -1,74 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const Title = styled.h1`
-    font-size: 4rem;
-    text-align: center;
-    font-weight: normal;
+const Title = styled.div`
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
 `;
 
-const Part = styled.span`
+const Part = styled.img`
+    position: absolute;
+    width: 120px;
+    height: auto;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: transform 0.3s ease;
+
     &:hover {
-        color: gray;
+        transform: scale(1.1);
     }
 `;
 
 const Main = () => {
-    const [activePart, setActivePart] = useState(null);
     const navigate = useNavigate();
 
-    const handleClick = (part) => {
-        setActivePart(part);
-        switch (part) {
-            case '羽':
-                navigate('/study');
-                break;
-            case '白':
-                navigate('/white');
-                break;
-            case '心':
-                navigate('/heart');
-                break;
-            case '貫':
-                navigate('/trace');
-                break;
-            default:
-                break;
-        }
+    const handleClick = (path) => {
+        navigate(path);
     };
 
     return (
-        <>
-            <Title>
-                <Part
-                    active={activePart === '羽'}
-                    onClick={() => handleClick('羽')}
-                >
-                    羽
-                </Part>
-                <Part
-                    active={activePart === '白'}
-                    onClick={() => handleClick('白')}
-                >
-                    白
-                </Part>
-                <Part
-                    active={activePart === '心'}
-                    onClick={() => handleClick('心')}
-                >
-                    心
-                </Part>
-                <Part
-                    active={activePart === '貫'}
-                    onClick={() => handleClick('貫')}
-                >
-                    貫
-                </Part>
-            </Title>
-        </>
+        <Title>
+            <Part
+                src="/images/Kanji/study.svg"
+                alt="Study"
+                style={{ top: '60px', left: '120px' }}
+                onClick={() => handleClick('/study')}
+            />
+            <Part
+                src="/images/Kanji/white.svg"
+                alt="White"
+                style={{ top: '65px', left: '120px' }}
+                onClick={() => handleClick('/white')}
+            />
+            <Part
+                src="/images/Kanji/heart.svg"
+                alt="Heart"
+                style={{ top: '60px', left: '150px' }}
+                onClick={() => handleClick('/heart')}
+            />
+            <Part
+                src="/images/Kanji/trace.svg"
+                alt="Trace"
+                style={{ top: '60px', left: '160px' }}
+                onClick={() => handleClick('/trace')}
+            />
+        </Title>
     );
 };
 
